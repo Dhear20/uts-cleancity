@@ -1,0 +1,31 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: 3.107.201.186
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd ~/uts-cleancity
+            # Update folder project dari GitHub
+            git init
+            git remote add origin https://github.com/Dhear20/uts-cleancity.git || true
+            git fetch --all
+            git reset --hard origin/main
+            
+            # Build dan jalankan ulang Docker
+            docker build -t cleancity-app .
+            docker rm -f running-app || true
+            docker run -d -p 3000:3000 --name running-app --env-file .env cleancity-app

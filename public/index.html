@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanCity - Pelaporan Sampah</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; padding: 50px; background-color: #e9ecef; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        h2 { color: #2d3436; text-align: center; margin-bottom: 20px; }
+        label { font-weight: bold; font-size: 0.9em; color: #636e72; }
+        input, button { width: 100%; margin: 8px 0 20px 0; padding: 12px; border-radius: 8px; border: 1px solid #dfe6e9; box-sizing: border-box; }
+        button { background-color: #27ae60; color: white; border: none; cursor: pointer; font-weight: bold; font-size: 1em; transition: 0.3s; }
+        button:hover { background-color: #2ecc71; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Lapor Sampah Liar</h2>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            
+            <label>Nama Pelapor:</label>
+            <input type="text" name="nama" placeholder="Masukkan nama Anda" required>
+            
+            <label>Lokasi / Deskripsi Sampah:</label>
+            <input type="text" name="deskripsi" placeholder="Contoh: Jl. Phh Mustofa depan Itenas" required>
+            
+            <label>Bukti Foto Sampah:</label>
+            <input type="file" name="foto" accept="image/*" required>
+            
+            <button type="submit">Kirim Laporan</button>
+        </form>
+    </div>
+</body>
+</html>
